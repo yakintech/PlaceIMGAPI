@@ -15,11 +15,25 @@ const imgSchema = new Schema({
     width: Number,
     height: Number,
     filter: String,
-    path: String
+    path: String,
+    rate:Number
 })
 
 const image = mongoose.model('image', imgSchema);
 
+const userSchema = new Schema({
+    name:String,
+    surname:String
+})
+
+// const user = mongoose.model('user',userSchema,'user')
+
+
+// var us = new user({
+//     name:'Bilge Adam'
+// });
+
+// us.save();
 
 var img = new image({
     name: 'Masa resmi',
@@ -29,8 +43,8 @@ var img = new image({
     path: 'masa.jpg'
 })
 
-img.save((err,doc)=>{
-    console.log(err);
-});
+// img.save((err,doc)=>{
+//     console.log(err);
+// });
 
 module.exports = image
