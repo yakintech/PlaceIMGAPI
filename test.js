@@ -16,15 +16,15 @@ console.log(uuidv4());
 
 
  
-// (async () => {
-//     // Set the options.
-//     const options = {
-//         images: ['images/kopek.jpg', 'images/kopek.jpg'],
-//         width: 800,
-//         height:601,
-//         quality:90
-//     };
+(async () => {
+    // Set the options.
+    const options = {
+        images: ['images/kopek.jpg', 'images/kopek.jpg'],
+        width: 800,
+        height:601,
+        quality:90
+    };
  
-//     // Run the module.
-//     await resizeOptimizeImages(options);
-// })();
+    // Run the module.
+    await resizeOptimizeImages(options);
+})();

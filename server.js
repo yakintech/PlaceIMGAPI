@@ -71,7 +71,6 @@ app.get('/img/:width?/:height?/:category?', (req, res) => {
 
     })
 
-    
 })
 
 
