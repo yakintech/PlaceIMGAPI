@@ -4,6 +4,7 @@ const image = require('./data/mongoosemodels.js');
 const path = require('path');
 const resizeOptimizeImages = require('resize-optimize-images');
 const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
 
 
 
@@ -40,28 +41,36 @@ app.get('/img/:width?/:height?/:category?', (req, res) => {
         delete query["categories.name"];
     }
 
-    image.find(query, (err, doc) => {
+    image.find(query, async (err, doc) => {
 
         if (!err) {
             if (doc.length != 0) {
                 let count = doc.length;
                 let rastgele = Math.floor(Math.random() * count);
-                var result = path.join(__dirname, 'images', doc[rastgele].path)
-                var responseresult = path.join(__dirname, 'responseimages', uuidv4() + '.jpeg' )
-                //640*480
-                //640*481
+
+                //db deki rastgele bir resmin yolunu buldum
+                let imagepath = doc[rastgele].path;
+                let clientpath = uuidv4() + '.jpeg';
+
+                //bu resimden bir kopya oluşturuyorum. Sonra kopya resmin boyutunu değiştirip kullanıcıya gönderiyorum
+                fs.copyFile(`images/${imagepath}`,`images/${clientpath}`,function(err){
+                    console.log(err);
+                })
+
+                 var resultpath = path.join(__dirname, 'images' ,clientpath )
 
                 const options = {
-                    images: [result, responseresult],
-                    width: rwidth,
-                    height:rheight,
+                    images: [resultpath],
+                    width: Number(rwidth),
+                    height:Number(rheight),
                     quality:90
                 };
-             
-                // Run the module.
-                await resizeOptimizeImages(options);
+                await resizeOptimizeImages(options).catch((err)=>{
+                    console.log(err);
+                });
                 
-                res.sendFile(responseresult);
+                res.sendFile(resultpath);
+
             }
             else {
                 res.send('Kriterlere uygun resim bulunamadı')

@@ -10,6 +10,9 @@ let ad = 'Çağatay';
 // //template literal
 // console.log(`Adınız: ${ad} yıldız`);
 
+//  1. /
+//  2. /product
+
 
 app.get('/product/:categoryid/:id', (req, res) => {
 

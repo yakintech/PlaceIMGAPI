@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    
+// function Merhaba(){
+//     console.log('Merhaba JS!');
+// }
+
+// //Merhaba();
+
+// async function gulegule(){
+//     console.log('Güle Güle');
+// }
+
+
+let data = [];
+
+async function dataCek(){
+   await fetch('https://northwind.now.sh/api/products')
+    .then((res)=>res.json())
+    .then((result)=>{
+         return result;
+    })
+}
+
+dataCek().then(()=>{
+    console.log(data);
+});
+
+
+
+
+</script>
